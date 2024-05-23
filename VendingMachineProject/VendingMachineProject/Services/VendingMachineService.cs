@@ -47,7 +47,15 @@ namespace VendingMachineProject.Services
         {
             displayMenu();
             Console.WriteLine("\nEnter Item ID you want to purchase: ");
+           
             int itemId = Convert.ToInt32(Console.ReadLine());
+             //------- Checking input if other than number
+               while (itemId.All(Char.IsLetter))
+                {
+                    Console.WriteLine("kindly Choose Word or alphabet only !\n");
+                    itemId = Convert.ToInt32(Console.ReadLine());
+                }
+                    
             var item = inventory.FirstOrDefault(p => p.Id == itemId);
             if (item != null)
             {
