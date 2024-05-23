@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -47,15 +47,17 @@ namespace VendingMachineProject.Services
         {
             displayMenu();
             Console.WriteLine("\nEnter Item ID you want to purchase: ");
-           
-            int itemId = Convert.ToInt32(Console.ReadLine());
-             //------- Checking input if other than number
-               while (itemId.All(Char.IsLetter))
+
+            //---------- Taking input from user -----------//
+            string input = Console.ReadLine();
+            //--------------------- Checking if input is other than number ------------//
+            while (!(input.All(Char.IsDigit)) || input == "")
                 {
-                    Console.WriteLine("kindly Choose Word or alphabet only !\n");
-                    itemId = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("kindly Choose any number from 1 to 9!\n");
+                    input = Console.ReadLine();
                 }
-                    
+            // --------- Check End ----------//
+            int itemId = Convert.ToInt32(input);
             var item = inventory.FirstOrDefault(p => p.Id == itemId);
             if (item != null)
             {
@@ -79,7 +81,16 @@ namespace VendingMachineProject.Services
         public void insertMoney()
         {
             Console.WriteLine("\nPlease insert money: ");
-            double insertedMoney = Convert.ToDouble(Console.ReadLine());
+            //---------- Taking input from user -----------//
+            string takemoney = Console.ReadLine();
+            //--------------------- Checking if input is other than number ------------//
+            while (!(takemoney.All(Char.IsDigit)) || takemoney == "")
+            {
+                Console.WriteLine("kindly Insert money in denomination of 1kr, 5kr, 10kr, 20kr, 50kr, 100kr, 500kr, 1000kr. ");
+                takemoney = Console.ReadLine();
+            }
+            // --------- Check End ----------//
+            double insertedMoney = Convert.ToDouble(takemoney);
             if (denominations.Contains(insertedMoney))
             {
                 moneyPool += insertedMoney;
@@ -118,8 +129,16 @@ namespace VendingMachineProject.Services
             while (started)
             {
                 Console.WriteLine("\nChoose an option: \n1. Insert Money\n2. Select item\n3. Check Balance in moneyPool\n4. Return change and Exit\n");
-                int option = Convert.ToInt32(Console.ReadLine());
-
+                //---------- Taking input from user -----------//
+                string takeoption = Console.ReadLine();
+                //--------------------- Checking if input is other than number ------------//
+                while (!(takeoption.All(Char.IsDigit)) || takeoption == "")
+                {
+                    Console.WriteLine("kindly Choose any number from 1 to 4!\n");
+                    takeoption = Console.ReadLine();
+                }
+                // ------- Check end ------//
+                int option = Convert.ToInt32(takeoption);
                 switch (option)
                 {
                     case 1:
